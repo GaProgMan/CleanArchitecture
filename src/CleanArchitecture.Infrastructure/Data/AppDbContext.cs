@@ -67,5 +67,7 @@ namespace CleanArchitecture.Infrastructure.Data
         {
             return SaveChangesAsync().GetAwaiter().GetResult();
         }
+        
+        public DbSet<Guestbook> Guestbooks { get; set; }
     }
 }

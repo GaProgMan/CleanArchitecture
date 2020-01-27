@@ -14,7 +14,16 @@ namespace CleanArchitecture.Web.ViewModels
             GuestbookName = name;
             PreviousEntries = entries;
         }
+
+        public HomePageViewModel(Guestbook dbGuestbook)
+        {
+            GuestbookName = dbGuestbook.Name;
+            PreviousEntries = dbGuestbook.Entries;
+        }
+        
         public string GuestbookName { get; set; }
         public List<GuestbookEntry> PreviousEntries { get; } = new List<GuestbookEntry>();
+
+        public GuestbookEntry NewEntry { get; set; }
     }
 }
