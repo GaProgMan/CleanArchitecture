@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CleanArchitecture.Core;
 using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.SharedKernel.Interfaces;
@@ -13,7 +14,7 @@ namespace CleanArchitecture.Web.Controllers
     {
         private readonly IRepository _repository;
 
-        public HomeController(IRepository repo, IMessageSender messageSender)
+        public HomeController(IRepository repo)
         {
             _repository = repo;
         }
@@ -23,32 +24,7 @@ namespace CleanArchitecture.Web.Controllers
             // Seed the database, if no records are found. Should move somewhere useful - i.e. program.cs or similar
             if (!_repository.List<Guestbook>().Any())
             {
-                var seededGuestbook = new Guestbook {Name = "Temporary Guestbook"};
-                seededGuestbook.Entries.Add(new GuestbookEntry
-                {
-                    EmailAddress = "ddd-session@ndc.london",
-                    Message = "Hi from compile time",
-                    DateTimeCreated = DateTime.UtcNow
-                });
-                seededGuestbook.Entries.Add(new GuestbookEntry
-                {
-                    EmailAddress = "ddd-session@ndc.london",
-                    Message = "Hi from yesterday",
-                    DateTimeCreated = DateTime.UtcNow.AddDays(-1)
-                });
-                seededGuestbook.Entries.Add(new GuestbookEntry
-                {
-                    EmailAddress = "ddd-session@ndc.london",
-                    Message = "Hi from an hour ago",
-                    DateTimeCreated = DateTime.UtcNow.AddHours(-1)
-                });
-                seededGuestbook.Entries.Add(new GuestbookEntry
-                {
-                    EmailAddress = "ddd-session@ndc.london",
-                    Message = "Hi from the future - blame the time cast pod machine wibbley wobbley-ness",
-                    DateTimeCreated = DateTime.UtcNow.AddHours(1)
-                });
-                _repository.Add(seededGuestbook);
+                DatabasePopulator.PopulateGuestBookEntries(_repository);
             }
             return View(new HomePageViewModel(_repository.GetById<Guestbook>(1, "Entries")));
         }

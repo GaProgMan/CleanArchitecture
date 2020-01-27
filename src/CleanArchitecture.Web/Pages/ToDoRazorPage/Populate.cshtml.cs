@@ -17,7 +17,7 @@ namespace CleanArchitecture.Web.Pages.ToDoRazorPage
 
         public void OnGet()
         {
-            RecordsAdded = DatabasePopulator.PopulateDatabase(_repository);
+            RecordsAdded = DatabasePopulator.PopulateToDos(_repository);
         }
     }
 }

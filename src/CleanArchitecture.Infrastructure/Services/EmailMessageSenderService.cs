@@ -14,10 +14,9 @@ namespace CleanArchitecture.Infrastructure.Services
             message.From = new MailAddress("donotreply@ddd-session.london");
             message.Subject = "New guestbook entry added";
             message.Body = messageBody;
-            using (var client = new SmtpClient("localhost", 25))
-            {
-                client.Send(message);
-            }
+            
+            using var client = new SmtpClient("localhost", 25);
+            client.Send(message);
         }
     }
 }

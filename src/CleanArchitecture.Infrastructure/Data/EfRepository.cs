@@ -41,6 +41,11 @@ namespace CleanArchitecture.Infrastructure.Data
             _dbContext.SaveChanges();
         }
 
+        public int Count<T>() where T : BaseEntity
+        {
+            return List<T>().Count;
+        }
+
         public void Update<T>(T entity) where T : BaseEntity
         {
             _dbContext.Entry(entity).State = EntityState.Modified;

@@ -9,5 +9,6 @@ namespace CleanArchitecture.SharedKernel.Interfaces
         T Add<T>(T entity) where T : BaseEntity;
         void Update<T>(T entity) where T : BaseEntity;
         void Delete<T>(T entity) where T : BaseEntity;
+        int Count<T>() where T : BaseEntity;
     }
 }

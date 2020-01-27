@@ -6,7 +6,7 @@ using CleanArchitecture.Core.Events;
 using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.SharedKernel.Interfaces;
 
-namespace CleanArchitecture.Core.Services
+namespace CleanArchitecture.Core.Handlers
 {
     public class GuestbookNotificationHandler : IHandle<EntryAddedEvent>
     {
