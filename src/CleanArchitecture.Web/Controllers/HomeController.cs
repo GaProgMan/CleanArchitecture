@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using CleanArchitecture.Core.Entities;
+using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.SharedKernel.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +13,7 @@ namespace CleanArchitecture.Web.Controllers
     {
         private readonly IRepository _repository;
 
-        public HomeController(IRepository repo)
+        public HomeController(IRepository repo, IMessageSender messageSender)
         {
             _repository = repo;
         }
@@ -57,28 +56,14 @@ namespace CleanArchitecture.Web.Controllers
         [HttpPost]
         public IActionResult Index(HomePageViewModel model)
         {
-            // Needs validation attirbutes? Not listed in Lab 2, though.
+            // Needs validation attributes? Not listed in Lab 2, though.
             if (!ModelState.IsValid)
             {
                 return StatusCode(StatusCodes.Status400BadRequest);
             }
 
             var relevantGuestbook = _repository.GetById<Guestbook>(1, "Entries");
-
-            foreach (var entry in relevantGuestbook.Entries)
-            {
-                var message = new MailMessage();
-                message.To.Add(entry.EmailAddress);
-                message.From = new MailAddress("donotreply@ddd-session.london");
-                message.Subject = "New guestbook entry added";
-                message.Body = model.NewEntry.Message;
-                using (var client = new SmtpClient("localhost", 25))
-                {
-                    client.Send(message);
-                }
-            }
-            
-            relevantGuestbook.Entries.Add((model.NewEntry));
+            relevantGuestbook.AddEntry(model.NewEntry);
             _repository.Update(relevantGuestbook);
 
             return View(new HomePageViewModel(relevantGuestbook));

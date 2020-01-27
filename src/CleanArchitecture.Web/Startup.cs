@@ -27,6 +27,7 @@ namespace CleanArchitecture.Web
 			});
 
 			services.AddDbContext();
+			services.AddMessageService();
 
 			services.AddControllersWithViews().AddNewtonsoftJson();
 			services.AddRazorPages();

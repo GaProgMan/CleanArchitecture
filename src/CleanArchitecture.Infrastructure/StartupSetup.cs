@@ -1,4 +1,6 @@
-﻿using CleanArchitecture.Infrastructure.Data;
+﻿using CleanArchitecture.Core.Interfaces;
+using CleanArchitecture.Infrastructure.Data;
+using CleanArchitecture.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,5 +11,8 @@ namespace CleanArchitecture.Infrastructure
 		public static void AddDbContext(this IServiceCollection services) =>
 			services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlite("Data Source=database.sqlite")); // will be created in web project root
+
+		public static void AddMessageService(this IServiceCollection services) =>
+			services.AddTransient<IMessageSender, EmailMessageSenderService>();
 	}
 }
