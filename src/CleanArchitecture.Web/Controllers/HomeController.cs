@@ -20,7 +20,13 @@ namespace CleanArchitecture.Web.Controllers
             hardcodedGuestbook.Entries.Add(new GuestbookEntry
             {
                 EmailAddress = "ddd-session@ndc.london",
-                Message = "Hi from the past",
+                Message = "Hi from yesterday",
+                DateTimeCreated = DateTime.UtcNow.AddDays(-1)
+            });
+            hardcodedGuestbook.Entries.Add(new GuestbookEntry
+            {
+                EmailAddress = "ddd-session@ndc.london",
+                Message = "Hi from an hour ago",
                 DateTimeCreated = DateTime.UtcNow.AddHours(-1)
             });
             hardcodedGuestbook.Entries.Add(new GuestbookEntry
