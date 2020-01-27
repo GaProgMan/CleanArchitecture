@@ -20,6 +20,7 @@ namespace CleanArchitecture.Web.Controllers
         
         public IActionResult Index()
         {
+            // Seed the database, if no records are found. Should move somewhere useful - i.e. program.cs or similar
             if (!_repository.List<Guestbook>().Any())
             {
                 var seededGuestbook = new Guestbook {Name = "Temporary Guestbook"};
