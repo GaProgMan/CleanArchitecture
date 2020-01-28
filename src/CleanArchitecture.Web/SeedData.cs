@@ -25,6 +25,35 @@ namespace CleanArchitecture.Web
             Description = "Make sure all the tests run and review what they are doing."
         };
 
+        public static readonly Guestbook SeededGuestbook = new Guestbook
+        {
+            Name = "Temporary Guestbook"
+        };
+        public static readonly GuestbookEntry CompileTimeEntry = new GuestbookEntry
+        {
+            EmailAddress = "ddd-session@ndc.london",
+            Message = "Hi from compile time",
+            DateTimeCreated = DateTime.UtcNow
+        };
+        public static readonly GuestbookEntry YesterdaysEntry = new GuestbookEntry
+        {
+            EmailAddress = "ddd-session@ndc.london",
+            Message = "Hi from yesterday",
+            DateTimeCreated = DateTime.UtcNow.AddDays(-1)
+        };
+        public static readonly GuestbookEntry OneHourAgoEntry = new GuestbookEntry
+        {
+            EmailAddress = "ddd-session@ndc.london",
+            Message = "Hi from an hour ago",
+            DateTimeCreated = DateTime.UtcNow.AddHours(-1)
+        };
+        public static readonly GuestbookEntry TomorrowsEntry = new GuestbookEntry
+        {
+            EmailAddress = "ddd-session@ndc.london",
+            Message = "Hi from the future - blame the time cast pod machine wibbley wobbley-ness",
+            DateTimeCreated = DateTime.UtcNow.AddHours(1)
+        };
+
         public static void Initialize(IServiceProvider serviceProvider)
         {
             using (var dbContext = new AppDbContext(
@@ -51,6 +80,15 @@ namespace CleanArchitecture.Web
             dbContext.ToDoItems.Add(ToDoItem1);
             dbContext.ToDoItems.Add(ToDoItem2);
             dbContext.ToDoItems.Add(ToDoItem3);
+
+            foreach (var item in dbContext.Guestbooks)
+            {
+                dbContext.Remove(item);
+            }
+            
+            SeededGuestbook.Entries.Add(CompileTimeEntry);
+
+            dbContext.Guestbooks.Add(SeededGuestbook);
 
             dbContext.SaveChanges();
         }
