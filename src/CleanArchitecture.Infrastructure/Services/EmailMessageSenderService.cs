@@ -1,5 +1,4 @@
 ﻿using System.Net.Mail;
-using System.Threading.Tasks;
 using CleanArchitecture.Core.Interfaces;
 
 namespace CleanArchitecture.Infrastructure.Services

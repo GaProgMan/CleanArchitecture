@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Events;
 using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.Core.Specifications;

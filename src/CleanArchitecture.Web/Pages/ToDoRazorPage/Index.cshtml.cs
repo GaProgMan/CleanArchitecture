@@ -1,5 +1,4 @@
 ﻿using CleanArchitecture.Core.Entities;
-using CleanArchitecture.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using CleanArchitecture.Core.Interfaces;

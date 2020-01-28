@@ -1,8 +1,8 @@
-﻿using CleanArchitecture.SharedKernel.Interfaces;
-using CleanArchitecture.SharedKernel;
+﻿using CleanArchitecture.SharedKernel;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Interfaces;
 
 namespace CleanArchitecture.Infrastructure.Data
@@ -18,6 +18,11 @@ namespace CleanArchitecture.Infrastructure.Data
 
         public T GetById<T>(int id) where T : BaseEntity
         {
+            // hardcoded hacks to get the final lab working - as defined in the handouts
+            if (typeof(T) == typeof(Guestbook))
+            {
+                return _dbContext.Set<Guestbook>().Include(g => g.Entries).SingleOrDefault(e => e.Id == id) as T;
+            }
             return _dbContext.Set<T>()
                 .SingleOrDefault(e => e.Id == id);
         }
@@ -36,6 +41,11 @@ namespace CleanArchitecture.Infrastructure.Data
 
         public List<T> List<T>(ISpecification<T> spec = null) where T : BaseEntity
         {
+            // hardcoded hacks to get the final lab working - as defined in the handouts
+            if (typeof(T) == typeof(Guestbook))
+            {
+                return _dbContext.Set<Guestbook>().Include(g => g.Entries).ToList() as List<T>;
+            }
             var query = _dbContext.Set<T>().AsQueryable();
             
             if (spec != null)

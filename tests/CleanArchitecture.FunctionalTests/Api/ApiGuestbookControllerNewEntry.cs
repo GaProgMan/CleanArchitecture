@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using CleanArchitecture.Core.Entities;
@@ -46,7 +47,7 @@ namespace CleanArchitecture.FunctionalTests.Api
             Assert.NotNull(result);
             Assert.Equal(1, result.Id);
             //Assert.NotEmpty(result.Entries);
-            Assert.NotEqual(1, result.Entries.Count);
+            Assert.NotEqual(1, result.Entries.ToList().Count);
         }
     }
 }

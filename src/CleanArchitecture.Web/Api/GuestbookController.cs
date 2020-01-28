@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Interfaces;
+using CleanArchitecture.Web.ApiModels;
 using CleanArchitecture.Web.Filters;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,7 @@ namespace CleanArchitecture.Web.Api
         {
             var guestbook = _repository.GetById<Guestbook>(id, "Entries");
 
-            return Ok(guestbook);
+            return Ok(new GuestbookDTO(guestbook));
         }
 
         [HttpPost("{id:int}/NewEntry")]
@@ -28,9 +29,9 @@ namespace CleanArchitecture.Web.Api
         {
             var guestbook = _repository.GetById<Guestbook>(id, "Entries");
 
-            guestbook.Entries.Add(entry);
+            guestbook.AddEntry(entry);
             _repository.Update(guestbook);
-            return Ok(guestbook);
+            return Ok(new GuestbookDTO(guestbook));
         }
     }
 }

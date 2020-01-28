@@ -1,9 +1,8 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
-using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Web;
+using CleanArchitecture.Web.ApiModels;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Newtonsoft.Json;
 using Xunit;
 
@@ -41,7 +40,7 @@ namespace CleanArchitecture.FunctionalTests.Api
             var stringResponse = await response.Content.ReadAsStringAsync();
             
             Assert.NotNull(stringResponse);
-            var result = JsonConvert.DeserializeObject<Guestbook>(stringResponse);
+            var result = JsonConvert.DeserializeObject<GuestbookDTO>(stringResponse);
             Assert.NotNull(result);
             Assert.Equal(1, result.Id);
             //Assert.NotEmpty(result.Entries);

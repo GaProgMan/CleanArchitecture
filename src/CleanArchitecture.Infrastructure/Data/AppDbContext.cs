@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using CleanArchitecture.Core.Entities;
 using CleanArchitecture.SharedKernel;
 using Ardalis.EFCore.Extensions;
-using System.Reflection;
-using JetBrains.Annotations;
 
 namespace CleanArchitecture.Infrastructure.Data
 {
@@ -30,6 +28,11 @@ namespace CleanArchitecture.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            var navigation = modelBuilder.Entity<Guestbook>()
+                .Metadata.FindNavigation((nameof(Guestbook.Entries)));
+            
+            navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
 
             modelBuilder.ApplyAllConfigurationsFromCurrentAssembly();
 

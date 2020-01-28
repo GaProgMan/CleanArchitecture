@@ -1,9 +1,6 @@
 ﻿using System;
 using CleanArchitecture.Core.Entities;
-using CleanArchitecture.SharedKernel.Interfaces;
-using System.Linq;
 using CleanArchitecture.Core.Interfaces;
-using CleanArchitecture.SharedKernel;
 
 namespace CleanArchitecture.Core
 {
@@ -41,31 +38,33 @@ namespace CleanArchitecture.Core
             }
             
             var seededGuestbook = new Guestbook {Name = "Temporary Guestbook"};
-            seededGuestbook.Entries.Add(new GuestbookEntry
+            seededGuestbook.AddEntry(new GuestbookEntry
             {
                 EmailAddress = "ddd-session@ndc.london",
                 Message = "Hi from compile time",
                 DateTimeCreated = DateTime.UtcNow
             });
-            seededGuestbook.Entries.Add(new GuestbookEntry
+            seededGuestbook.AddEntry(new GuestbookEntry
             {
                 EmailAddress = "ddd-session@ndc.london",
                 Message = "Hi from yesterday",
                 DateTimeCreated = DateTime.UtcNow.AddDays(-1)
             });
-            seededGuestbook.Entries.Add(new GuestbookEntry
+            seededGuestbook.AddEntry(new GuestbookEntry
             {
                 EmailAddress = "ddd-session@ndc.london",
                 Message = "Hi from an hour ago",
                 DateTimeCreated = DateTime.UtcNow.AddHours(-1)
             });
-            seededGuestbook.Entries.Add(new GuestbookEntry
+            seededGuestbook.AddEntry(new GuestbookEntry
             {
                 EmailAddress = "ddd-session@ndc.london",
                 Message = "Hi from the future - blame the time cast pod machine wibbley wobbley-ness",
                 DateTimeCreated = DateTime.UtcNow.AddHours(1)
             });
             repository.Add(seededGuestbook);
+            
+            seededGuestbook.Events.Clear();
 
             return repository.Count<Guestbook>();
         }

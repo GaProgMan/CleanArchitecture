@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using CleanArchitecture.SharedKernel;
 
 namespace CleanArchitecture.SharedKernel.Interfaces
 {

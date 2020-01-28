@@ -86,9 +86,11 @@ namespace CleanArchitecture.Web
                 dbContext.Remove(item);
             }
             
-            SeededGuestbook.Entries.Add(CompileTimeEntry);
+            SeededGuestbook.AddEntry(CompileTimeEntry);
 
             dbContext.Guestbooks.Add(SeededGuestbook);
+            
+            SeededGuestbook.Events.Clear();
 
             dbContext.SaveChanges();
         }

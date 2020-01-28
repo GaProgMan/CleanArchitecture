@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using CleanArchitecture.Core;
 using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Interfaces;
-using CleanArchitecture.SharedKernel.Interfaces;
 using CleanArchitecture.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +37,7 @@ namespace CleanArchitecture.Web.Controllers
             }
 
             var relevantGuestbook = _repository.GetById<Guestbook>(1, "Entries");
-            relevantGuestbook.AddEntry(model.NewEntry);
+            relevantGuestbook.AddEntry(model.NewEntry.FromDTO());
             _repository.Update(relevantGuestbook);
 
             return View(new HomePageViewModel(relevantGuestbook));

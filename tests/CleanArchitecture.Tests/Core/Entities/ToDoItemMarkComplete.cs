@@ -1,5 +1,4 @@
-﻿using CleanArchitecture.Core.Entities;
-using CleanArchitecture.Core.Events;
+﻿using CleanArchitecture.Core.Events;
 using System.Linq;
 using Xunit;
 
