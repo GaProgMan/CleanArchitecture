@@ -36,37 +36,37 @@ namespace CleanArchitecture.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GuestbookEntry",
+                name: "GuestbookEntries",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    GuestbookId = table.Column<int>(nullable: false),
                     EmailAddress = table.Column<string>(nullable: true),
                     Message = table.Column<string>(nullable: true),
-                    DateTimeCreated = table.Column<DateTimeOffset>(nullable: false),
-                    GuestbookId = table.Column<int>(nullable: true)
+                    DateTimeCreated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GuestbookEntry", x => x.Id);
+                    table.PrimaryKey("PK_GuestbookEntries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GuestbookEntry_Guestbooks_GuestbookId",
+                        name: "FK_GuestbookEntries_Guestbooks_GuestbookId",
                         column: x => x.GuestbookId,
                         principalTable: "Guestbooks",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_GuestbookEntry_GuestbookId",
-                table: "GuestbookEntry",
+                name: "IX_GuestbookEntries_GuestbookId",
+                table: "GuestbookEntries",
                 column: "GuestbookId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "GuestbookEntry");
+                name: "GuestbookEntries");
 
             migrationBuilder.DropTable(
                 name: "ToDoItems");

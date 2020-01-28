@@ -69,5 +69,6 @@ namespace CleanArchitecture.Infrastructure.Data
         }
         
         public DbSet<Guestbook> Guestbooks { get; set; }
+        public DbSet<GuestbookEntry> GuestbookEntries { get; set; }
     }
 }

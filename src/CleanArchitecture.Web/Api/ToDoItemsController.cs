@@ -4,6 +4,7 @@ using CleanArchitecture.Web.ApiModels;
 using CleanArchitecture.Web.Filters;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using CleanArchitecture.Core.Interfaces;
 
 namespace CleanArchitecture.Web.Api
 {

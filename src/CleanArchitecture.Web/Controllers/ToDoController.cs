@@ -4,6 +4,7 @@ using CleanArchitecture.SharedKernel.Interfaces;
 using CleanArchitecture.Web.ApiModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using CleanArchitecture.Core.Interfaces;
 
 namespace CleanArchitecture.Web.Controllers
 {

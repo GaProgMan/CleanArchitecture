@@ -2,6 +2,7 @@
 using CleanArchitecture.Core.Entities;
 using CleanArchitecture.SharedKernel.Interfaces;
 using System.Linq;
+using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.SharedKernel;
 
 namespace CleanArchitecture.Core

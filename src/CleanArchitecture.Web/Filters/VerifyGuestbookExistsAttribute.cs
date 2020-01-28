@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CleanArchitecture.Core.Entities;
+using CleanArchitecture.Core.Interfaces;
 using CleanArchitecture.SharedKernel;
 using CleanArchitecture.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Mvc;

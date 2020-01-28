@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Events;
 using CleanArchitecture.Core.Interfaces;
+using CleanArchitecture.Core.Specifications;
 using CleanArchitecture.SharedKernel.Interfaces;
 
 namespace CleanArchitecture.Core.Handlers
@@ -18,14 +19,12 @@ namespace CleanArchitecture.Core.Handlers
             _messageSender = messageSender;
             _repository = repository;
         }
+        
         public async Task Handle(EntryAddedEvent domainEvent)
         {
-            var relevantGuestbook = _repository.GetById<Guestbook>(domainEvent.targetParentId, "Entries");
-
-            var addresses =
-                relevantGuestbook.Entries
-                    .Where(entry => entry.DateTimeCreated >= DateTimeOffset.UtcNow.AddDays(-1))
-                    .Where(entry => entry.Id != domainEvent.targetEntry.Id)
+            var policy = new GuestbookNotificationPolicy(domainEvent.targetParentId, domainEvent.targetEntry.Id);
+            var addresses = 
+                _repository.List(policy)
                     .Select(entry => entry.EmailAddress);
             
             foreach (var singleAddress in addresses)

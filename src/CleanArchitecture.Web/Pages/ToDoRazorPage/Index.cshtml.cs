@@ -2,6 +2,7 @@
 using CleanArchitecture.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using CleanArchitecture.Core.Interfaces;
 
 namespace CleanArchitecture.Web.Pages.ToDoRazorPage
 {

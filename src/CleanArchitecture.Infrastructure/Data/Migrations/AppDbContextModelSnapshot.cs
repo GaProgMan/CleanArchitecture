@@ -36,13 +36,13 @@ namespace CleanArchitecture.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("DateTimeCreated")
+                    b.Property<DateTime>("DateTimeCreated")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EmailAddress")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("GuestbookId")
+                    b.Property<int>("GuestbookId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Message")
@@ -52,7 +52,7 @@ namespace CleanArchitecture.Infrastructure.Data.Migrations
 
                     b.HasIndex("GuestbookId");
 
-                    b.ToTable("GuestbookEntry");
+                    b.ToTable("GuestbookEntries");
                 });
 
             modelBuilder.Entity("CleanArchitecture.Core.Entities.ToDoItem", b =>
@@ -80,7 +80,9 @@ namespace CleanArchitecture.Infrastructure.Data.Migrations
                 {
                     b.HasOne("CleanArchitecture.Core.Entities.Guestbook", null)
                         .WithMany("Entries")
-                        .HasForeignKey("GuestbookId");
+                        .HasForeignKey("GuestbookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

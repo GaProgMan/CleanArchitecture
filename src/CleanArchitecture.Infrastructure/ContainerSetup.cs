@@ -6,6 +6,7 @@ using CleanArchitecture.Infrastructure.Data;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
+using CleanArchitecture.Core.Interfaces;
 
 namespace CleanArchitecture.Infrastructure
 {
